@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.0"
+      version = "5.23.1"
     }
   }
 }
@@ -312,8 +312,8 @@ resource "aws_db_instance" "default" {
   instance_class         = "db.t2.micro"
   multi_az               = true
   name                   = "mydb"
-  username               = "username"
-  password               = "password"
+  username               = "master"
+  password               = "Raham#123456"
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.database-sg.id]
 }
