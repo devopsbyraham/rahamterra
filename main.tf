@@ -302,9 +302,9 @@ resource "aws_db_instance" "default" {
   engine_version         = "8.0.28"
   instance_class         = "db.t2.micro"
   multi_az               = true
-  database_name           = "mydb"
-  master_username         = "raham"
-  master_password         = "Rahamshaik#444555"
+  database_name          = "mydb"
+  username               = "raham"
+  password               = "Rahamshaik#444555"
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.database-sg.id]
 }
