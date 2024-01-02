@@ -186,7 +186,7 @@ resource "aws_instance" "webserver2" {
 
 # Create Web Security Group
 resource "aws_security_group" "webserver-sg" {
-  name        = "Web-SG"
+  name        = "webserver-sg"
   description = "Allow HTTP inbound traffic"
   vpc_id      = aws_vpc.my-vpc.id
 
@@ -218,7 +218,7 @@ resource "aws_security_group" "webserver-sg" {
 }
 
 # Create Application Security Group
-resource "aws_security_group" "web-sg" {
+resource "aws_security_group" "appserver-sg" {
   name        = "appserver-SG"
   description = "Allow inbound traffic from ALB"
   vpc_id      = aws_vpc.my-vpc.id
@@ -228,7 +228,7 @@ resource "aws_security_group" "web-sg" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.web-sg.id]
+    security_groups = [aws_security_group.appserver-sg.id]
   }
 
  ingress {
@@ -236,7 +236,7 @@ resource "aws_security_group" "web-sg" {
     from_port       = 22
     to_port         = 22
     protocol        = "tcp"
-    security_groups = [aws_security_group.web-sg.id]
+    security_groups = [aws_security_group.appserver-sg.id]
   }
 
   egress {
@@ -262,7 +262,7 @@ resource "aws_security_group" "database-sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.webserver-sg.id]
+    security_groups = [aws_security_group.database-sg.id]
   }
 
   egress {
