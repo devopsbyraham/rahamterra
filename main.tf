@@ -138,6 +138,7 @@ resource "aws_instance" "webserver1" {
   ami                    = "ami-0d5eff06f840b45e9"
   instance_type          = "t2.micro"
   availability_zone      = "us-east-1a"
+  key_name               = "jrb"
   vpc_security_group_ids = [aws_security_group.webserver-sg.id]
   subnet_id              = aws_subnet.web-subnet-1.id
   user_data              = file("install_apache.sh")
@@ -157,6 +158,7 @@ resource "aws_instance" "webserver2" {
   ami                    = "ami-0d5eff06f840b45e9"
   instance_type          = "t2.micro"
   availability_zone      = "us-east-1b"
+  key_name               = "jrb"
   vpc_security_group_ids = [aws_security_group.webserver-sg.id]
   subnet_id              = aws_subnet.web-subnet-2.id
   user_data              = file("install_apache.sh")
@@ -180,6 +182,14 @@ resource "aws_security_group" "web-sg" {
 
   ingress {
     description = "HTTP from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "HTTP from VPC"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -199,7 +209,7 @@ resource "aws_security_group" "web-sg" {
 
 # Create Application Security Group
 resource "aws_security_group" "webserver-sg" {
-  name        = "Webserver-SG"
+  name        = "appserver-SG"
   description = "Allow inbound traffic from ALB"
   vpc_id      = aws_vpc.my-vpc.id
 
@@ -219,7 +229,7 @@ resource "aws_security_group" "webserver-sg" {
   }
 
   tags = {
-    Name = "Webserver-SG"
+    Name = "appserver-SG"
   }
 }
 
@@ -302,7 +312,7 @@ resource "aws_db_instance" "default" {
   engine_version         = "8.0.28"
   instance_class         = "db.t2.micro"
   multi_az               = true
-  db_name                   = "mydb"
+  db_name                = "mydb"
   username               = "raham"
   password               = "Rahamshaik#444555"
   skip_final_snapshot    = true
