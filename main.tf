@@ -151,6 +151,11 @@ resource "aws_instance" "webserver1" {
     source      = "index.html"
     destination = "/var/www/html/index.html"
 
+  connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ec2-user"
+    }
   }
 }
 
@@ -171,6 +176,11 @@ resource "aws_instance" "webserver2" {
     source      = "index.html"
     destination = "/var/www/html/index.html"
 
+   connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ec2-user"
+    }
   }
 }
 
