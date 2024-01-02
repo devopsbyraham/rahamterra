@@ -148,7 +148,7 @@ resource "aws_instance" "webserver1" {
   }
 
   provisioner "file" {
-    source      = "index.html"
+    source      = "/var/lib/jenkins/workspace/terraformpipeline/index.html"
     destination = "/var/www/html/index.html"
 
   connection {
@@ -173,7 +173,7 @@ resource "aws_instance" "webserver2" {
   }
 
   provisioner "file" {
-    source      = "index.html"
+    source      = "/var/lib/jenkins/workspace/terraformpipeline/index.html"
     destination = "/var/www/html/index.html"
 
    connection {
