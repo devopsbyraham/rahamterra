@@ -153,6 +153,7 @@ resource "aws_instance" "webserver1" {
 
   connection {
       type        = "ssh"
+      host        = self.public_ip
       user        = "ec2-user"
     }
   }
@@ -177,6 +178,7 @@ resource "aws_instance" "webserver2" {
 
    connection {
       type        = "ssh"
+      host        = self.public_ip
       user        = "ec2-user"
     }
   }
