@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.23.1"
+      version = "5.31.0"
     }
   }
 }
@@ -16,7 +16,7 @@ provider "aws" {
 resource "aws_vpc" "my-vpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
-    Name = "Demo VPC"
+    Name = "swiggy-VPC"
   }
 }
 
@@ -44,7 +44,7 @@ resource "aws_subnet" "web-subnet-2" {
 
 
 
-# Create Application Public Subnet
+# Create Application Private Subnet
 resource "aws_subnet" "application-subnet-1" {
   vpc_id                  = aws_vpc.my-vpc.id
   cidr_block              = "10.0.11.0/24"
@@ -103,7 +103,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.my-vpc.id
 
   tags = {
-    Name = "Demo IGW"
+    Name = "SWIGGY-IGW"
   }
 }
 
