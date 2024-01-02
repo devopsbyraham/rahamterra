@@ -185,7 +185,7 @@ resource "aws_instance" "webserver2" {
 }
 
 # Create Web Security Group
-resource "aws_security_group" "app-sg" {
+resource "aws_security_group" "webserver-sg" {
   name        = "Web-SG"
   description = "Allow HTTP inbound traffic"
   vpc_id      = aws_vpc.my-vpc.id
