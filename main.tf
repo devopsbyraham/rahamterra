@@ -185,7 +185,7 @@ resource "aws_instance" "webserver2" {
 }
 
 # Create Web Security Group
-resource "aws_security_group" "web-sg" {
+resource "aws_security_group" "app-sg" {
   name        = "Web-SG"
   description = "Allow HTTP inbound traffic"
   vpc_id      = aws_vpc.my-vpc.id
@@ -227,6 +227,14 @@ resource "aws_security_group" "webserver-sg" {
     description     = "Allow traffic from web layer"
     from_port       = 80
     to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.web-sg.id]
+  }
+
+ ingress {
+    description     = "Allow traffic from web layer"
+    from_port       = 22
+    to_port         = 22
     protocol        = "tcp"
     security_groups = [aws_security_group.web-sg.id]
   }
