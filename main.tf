@@ -218,7 +218,7 @@ resource "aws_security_group" "app-sg" {
 }
 
 # Create Application Security Group
-resource "aws_security_group" "webserver-sg" {
+resource "aws_security_group" "web-sg" {
   name        = "appserver-SG"
   description = "Allow inbound traffic from ALB"
   vpc_id      = aws_vpc.my-vpc.id
