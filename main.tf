@@ -228,7 +228,7 @@ resource "aws_security_group" "appserver-sg" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.appserver-sg.id]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
  ingress {
@@ -236,7 +236,7 @@ resource "aws_security_group" "appserver-sg" {
     from_port       = 22
     to_port         = 22
     protocol        = "tcp"
-    security_groups = [aws_security_group.appserver-sg.id]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -262,7 +262,7 @@ resource "aws_security_group" "database-sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.database-sg.id]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -323,7 +323,7 @@ resource "aws_lb_listener" "external-elb" {
   }
 }
 
-resource "aws_db_instance" "default" {
+/*resource "aws_db_instance" "default" {
   allocated_storage      = 10
   db_subnet_group_name   = aws_db_subnet_group.default.id
   engine                 = "mysql"
@@ -345,6 +345,7 @@ resource "aws_db_subnet_group" "default" {
     Name = "My DB subnet group"
   }
 }
+*/
 
 output "lb_dns_name" {
   description = "The DNS name of the load balancer"
